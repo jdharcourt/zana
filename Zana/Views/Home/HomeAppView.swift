@@ -108,11 +108,7 @@ private struct TabBar: View {
         }
         .padding(.horizontal, 18)
         .padding(.top, 10)
-        .padding(.bottom, 24)
-        .background(.ultraThinMaterial)
-        .overlay(alignment: .top) {
-            Rectangle().fill(Color(hex: "#e3dccd")).frame(height: 1)
-        }
+        .padding(.bottom, 8)
     }
 
     private func tabButton(_ tab: AppTab, systemName: String, label: String) -> some View {
