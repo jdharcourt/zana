@@ -39,7 +39,7 @@ struct FoldersTabView: View {
                             }
                             .padding(16)
                             .background(Color.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                         }
                     }
                 }

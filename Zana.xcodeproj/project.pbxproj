@@ -17,6 +17,7 @@
 		59893C0166EFABD8FA4FB0D2 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5EFB60DE4D4020144A7E87 /* CarouselView.swift */; };
 		607E84C6CF82586363EF8772 /* DMSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42D7FA25809BDDAF3D6BB80D /* DMSans-Medium.ttf */; };
 		620F95A5461775F00CDA3965 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8BBD4F125CB4378DA6980 /* Theme.swift */; };
+		696516A0A97E306931C1D61D /* Supabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4F22F5D0B50CF5879EAA95 /* Supabase.swift */; };
 		74A3E3B1C2CC5E9898B33CF5 /* AccountTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D26897F4543A2ECAE5586E /* AccountTabView.swift */; };
 		74DC07706568CA5455667C91 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5377A3A82B60AF860A2DFCE4 /* SplashView.swift */; };
 		7D59361CF15F3BFC7FB62C61 /* ScreeningsCheckStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E2FA181341FAC5FCE00C10 /* ScreeningsCheckStepView.swift */; };
@@ -24,7 +25,6 @@
 		96F4D80258E32C988E3B3252 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC0585506FBD52FA29894490 /* Assets.xcassets */; };
 		9817E04CD378DEF09C07DCC9 /* ConditionsStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8891D179C741F6B34157844A /* ConditionsStepView.swift */; };
 		9E62967FE921CB67F902597C /* ProfileDetailsStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5513618AFF947EDED661A511 /* ProfileDetailsStepView.swift */; };
-		A1E6DE9C5949AFE541FA95BA /* AiSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E29AEE7B59D6FFF5647482 /* AiSummaryView.swift */; };
 		A4A2E069F7C22893E36FCBEF /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F372A779590FA50D83E2B78 /* Models.swift */; };
 		A590F7BE535DBFC5ECA9B52E /* InstrumentSerif-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65AB6458242E6E18BDD97106 /* InstrumentSerif-Italic.ttf */; };
 		A59B440571F9FF5BC94A8279 /* StatusBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1009D4CB718EC192CC78FF /* StatusBarStyle.swift */; };
@@ -39,8 +39,8 @@
 		D2E2BA9027A90671F06081D2 /* ScreeningDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F366A034A7E31C09364D00F /* ScreeningDetailView.swift */; };
 		DA1086E0967E34F08093B67A /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E250861C48CBD3F39184005 /* Icons.swift */; };
 		DF034AE583FD7369BB7D823B /* DMSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1293D622FDCB96637FD4372C /* DMSans-Regular.ttf */; };
-		DF4B310D24815783E736C56B /* VerifyCodeStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A25277BB5914D26EBF1699 /* VerifyCodeStepView.swift */; };
 		E7257EE53596A31C53B558F2 /* EmailStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCADF0BD0C8796119056217 /* EmailStepView.swift */; };
+		E94D8C2BE0C61743DD2C648A /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 15380F07F30E36A242E6A732 /* Supabase */; };
 		EE78326ECB215D6E98C4E87A /* WearableConnectStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D2A71607B19EAFFBED624F /* WearableConnectStepView.swift */; };
 		EF058F5F3F151592490DC89A /* DMSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18DBD8C7280C8F09C7DE8147 /* DMSans-SemiBold.ttf */; };
 /* End PBXBuildFile section */
@@ -63,12 +63,11 @@
 		5513618AFF947EDED661A511 /* ProfileDetailsStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailsStepView.swift; sourceTree = "<group>"; };
 		59D26897F4543A2ECAE5586E /* AccountTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTabView.swift; sourceTree = "<group>"; };
 		5E250861C48CBD3F39184005 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
-		60A25277BB5914D26EBF1699 /* VerifyCodeStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeStepView.swift; sourceTree = "<group>"; };
 		65AB6458242E6E18BDD97106 /* InstrumentSerif-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "InstrumentSerif-Italic.ttf"; sourceTree = "<group>"; };
 		6CA79D1EA79C99966B6F0162 /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
 		6DA63BEEEED0E66EB5BBE4CD /* DMSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans-Bold.ttf"; sourceTree = "<group>"; };
 		77D6807C5882EBA893B936F6 /* HomeAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAppView.swift; sourceTree = "<group>"; };
-		78E29AEE7B59D6FFF5647482 /* AiSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiSummaryView.swift; sourceTree = "<group>"; };
+		7A4F22F5D0B50CF5879EAA95 /* Supabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supabase.swift; sourceTree = "<group>"; };
 		7D5EFB60DE4D4020144A7E87 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		7F372A779590FA50D83E2B78 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		86E9EE10EFD042E5307FD5A3 /* InstrumentSerif-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "InstrumentSerif-Regular.ttf"; sourceTree = "<group>"; };
@@ -85,6 +84,17 @@
 		DC4BAB80023219A69EC9B016 /* ZanaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZanaApp.swift; sourceTree = "<group>"; };
 		DDCADF0BD0C8796119056217 /* EmailStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailStepView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		66BC57178297644833A99F1F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E94D8C2BE0C61743DD2C648A /* Supabase in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		33F2D04F4530CFD8115A8C6B /* App */ = {
@@ -137,6 +147,7 @@
 				AC0585506FBD52FA29894490 /* Assets.xcassets */,
 				9C95D84FB34A149E9D9A8AB5 /* Info.plist */,
 				33F2D04F4530CFD8115A8C6B /* App */,
+				CFEFF7CA7A5C10CAF1591CFF /* Backend */,
 				9B0600CD4ECA42B691F60187 /* Design */,
 				A335367CB17377255D4D144D /* Models */,
 				6CFE8A76640EE669BE455040 /* Resources */,
@@ -172,18 +183,24 @@
 				5513618AFF947EDED661A511 /* ProfileDetailsStepView.swift */,
 				ABEFA6FFB0989C17F3DF669D /* ProfileNameStepView.swift */,
 				45E2FA181341FAC5FCE00C10 /* ScreeningsCheckStepView.swift */,
-				60A25277BB5914D26EBF1699 /* VerifyCodeStepView.swift */,
 				21D2A71607B19EAFFBED624F /* WearableConnectStepView.swift */,
 				97C153ED38EBA0B209A36EAE /* WearableOfferStepView.swift */,
 			);
 			path = Steps;
 			sourceTree = "<group>";
 		};
+		CFEFF7CA7A5C10CAF1591CFF /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				7A4F22F5D0B50CF5879EAA95 /* Supabase.swift */,
+			);
+			path = Backend;
+			sourceTree = "<group>";
+		};
 		DE62D7C2ABA834CCF616910E /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				59D26897F4543A2ECAE5586E /* AccountTabView.swift */,
-				78E29AEE7B59D6FFF5647482 /* AiSummaryView.swift */,
 				A0C0E3FDD91D08E185015195 /* FolderDetailView.swift */,
 				3A5DC20A45357E78D4E3194A /* FoldersTabView.swift */,
 				77D6807C5882EBA893B936F6 /* HomeAppView.swift */,
@@ -236,6 +253,7 @@
 			buildPhases = (
 				EFB605982655A6229966F9D7 /* Sources */,
 				28560E8C373DBB10DDD11DD1 /* Resources */,
+				66BC57178297644833A99F1F /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -243,6 +261,7 @@
 			);
 			name = Zana;
 			packageProductDependencies = (
+				15380F07F30E36A242E6A732 /* Supabase */,
 			);
 			productName = Zana;
 			productReference = 4DA42C216A999AA5A76AF2A1 /* Zana.app */;
@@ -266,6 +285,9 @@
 			);
 			mainGroup = 635778930B50A58CC58795D3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				29F429CF2A8924CA30A7C32A /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4D76234675745D4A4EA418BA /* Products */;
 			projectDirPath = "";
@@ -299,7 +321,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				74A3E3B1C2CC5E9898B33CF5 /* AccountTabView.swift in Sources */,
-				A1E6DE9C5949AFE541FA95BA /* AiSummaryView.swift in Sources */,
 				B0A5A13B02A32953AFB1F724 /* AppState.swift in Sources */,
 				59893C0166EFABD8FA4FB0D2 /* CarouselView.swift in Sources */,
 				9817E04CD378DEF09C07DCC9 /* ConditionsStepView.swift in Sources */,
@@ -321,9 +342,9 @@
 				CECF646B9E9F90E5C2468154 /* ScreeningsTabView.swift in Sources */,
 				74DC07706568CA5455667C91 /* SplashView.swift in Sources */,
 				A59B440571F9FF5BC94A8279 /* StatusBarStyle.swift in Sources */,
+				696516A0A97E306931C1D61D /* Supabase.swift in Sources */,
 				620F95A5461775F00CDA3965 /* Theme.swift in Sources */,
 				27A1298A8D5733B546F02F8C /* UploadSheetView.swift in Sources */,
-				DF4B310D24815783E736C56B /* VerifyCodeStepView.swift in Sources */,
 				EE78326ECB215D6E98C4E87A /* WearableConnectStepView.swift in Sources */,
 				A9C81D78C6CE324036D295E8 /* WearableOfferStepView.swift in Sources */,
 				3FDC94A1A8670419257F56F5 /* ZanaApp.swift in Sources */,
@@ -516,6 +537,25 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		29F429CF2A8924CA30A7C32A /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 2.51.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		15380F07F30E36A242E6A732 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29F429CF2A8924CA30A7C32A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 37C2E011BF25584391D82A4E /* Project object */;
 }

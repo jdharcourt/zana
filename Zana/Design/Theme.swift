@@ -68,7 +68,6 @@ enum ZColor {
     static let heroGradientStart = Color(hex: "#DCEBE8")
     static let heroGradientEnd = Color(hex: "#DEE4F2")
     static let ringTrack = Color(hex: "#E5DFD3")
-    static let trackFill = Color(hex: "#eee7db")
 
     // Splash gradient
     static let splashGradient = LinearGradient(
@@ -83,28 +82,10 @@ enum ZColor {
         endPoint: UnitPoint(x: 0.9, y: 1.0)
     )
 
-    static let aiGradient = LinearGradient(
-        colors: [teal, purple],
-        startPoint: .topLeading,
-        endPoint: .bottomTrailing
-    )
-
-    static let aiButtonGradient = LinearGradient(
-        colors: [blueDeep, purple],
-        startPoint: .leading,
-        endPoint: .trailing
-    )
-
     static let fabGradient = LinearGradient(
         colors: [teal, blue],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
-    )
-
-    static let uploadProgressGradient = LinearGradient(
-        colors: [teal, purple],
-        startPoint: .leading,
-        endPoint: .trailing
     )
 
     static func carouselSlideGradient(_ index: Int) -> LinearGradient {

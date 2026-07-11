@@ -62,9 +62,37 @@ struct ZLabeledField: View {
                 .font(.z(11.5, .semibold))
                 .tracking(0.5)
                 .foregroundStyle(ZColor.textTertiary)
-            TextField(placeholder, text: $text)
+            TextField("", text: $text, prompt: Text(placeholder).foregroundStyle(ZColor.ink.opacity(0.65)))
                 .font(.z(15))
+                .foregroundStyle(ZColor.ink)
+                .tint(ZColor.ink)
                 .keyboardType(keyboardType)
+                .padding(15)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: ZRadius.input, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: ZRadius.input, style: .continuous)
+                        .stroke(ZColor.inputBorder, lineWidth: 1)
+                )
+        }
+    }
+}
+
+struct ZSecureField: View {
+    let label: String
+    @Binding var text: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(label.uppercased())
+                .font(.z(11.5, .semibold))
+                .tracking(0.5)
+                .foregroundStyle(ZColor.textTertiary)
+            SecureField("", text: $text, prompt: Text("At least 8 characters").foregroundStyle(ZColor.ink.opacity(0.65)))
+                .font(.z(15))
+                .foregroundStyle(ZColor.ink)
+                .tint(ZColor.ink)
+                .textContentType(.password)
                 .padding(15)
                 .background(Color.white)
                 .clipShape(RoundedRectangle(cornerRadius: ZRadius.input, style: .continuous))

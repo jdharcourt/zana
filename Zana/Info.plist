@@ -18,6 +18,10 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>SupabasePublishableKey</key>
+	<string>sb_publishable_FIsyuP203Bgz9zfEWAWiIw_e2Ouercl</string>
+	<key>SupabaseURL</key>
+	<string>https://ntlkrsfikgaimgaenwqk.supabase.co</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>DMSans-Regular.ttf</string>

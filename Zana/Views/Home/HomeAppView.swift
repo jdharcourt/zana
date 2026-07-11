@@ -1,8 +1,5 @@
 import SwiftUI
 
-/// The post-onboarding app shell: four tabs plus every overlay that can appear above them
-/// (folder detail, upload flow, screening detail, AI summary), stacked in the same order
-/// the prototype uses for its z-index layers.
 struct HomeAppView: View {
     @EnvironmentObject var state: AppState
 
@@ -31,16 +28,11 @@ struct HomeAppView: View {
                     .transition(.opacity.combined(with: .move(edge: .bottom)))
             }
 
-            if state.aiSummaryOpen {
-                AiSummaryView()
-                    .transition(.opacity.combined(with: .move(edge: .bottom)))
-            }
         }
         .statusBarStyle(.darkContent)
         .animation(.easeInOut(duration: 0.22), value: state.openFolderId)
         .animation(.easeInOut(duration: 0.2), value: state.uploadStep)
         .animation(.easeInOut(duration: 0.2), value: state.screeningDetailId)
-        .animation(.easeInOut(duration: 0.2), value: state.aiSummaryOpen)
     }
 
     @ViewBuilder
@@ -54,7 +46,6 @@ struct HomeAppView: View {
     }
 }
 
-/// Standard header used at the top of each tab ("Sophia · 30 yo" + menu button).
 struct TabHeader: View {
     @EnvironmentObject var state: AppState
 

@@ -4,7 +4,6 @@ enum AppStep: Equatable {
     case splash
     case carousel
     case signupEmail
-    case verifyCode
     case profileName
     case profileDetails
     case privacy
@@ -15,7 +14,7 @@ enum AppStep: Equatable {
     case home
 
     static let modalSteps: [AppStep] = [
-        .signupEmail, .verifyCode, .profileName, .profileDetails,
+        .signupEmail, .profileName, .profileDetails,
         .privacy, .conditions, .screeningsCheck, .wearableOffer, .wearableConnect,
     ]
 
@@ -31,7 +30,11 @@ enum AppTab {
     case home, folders, screenings, account
 }
 
-enum UploadStep {
+enum AuthMode {
+    case signUp, signIn
+}
+
+enum UploadStep: Equatable {
     case pick, uploading, details, done
 }
 
@@ -98,9 +101,94 @@ struct ScreeningItemDef: Identifiable {
     let history: [ScreeningHistoryEntry]
 }
 
-struct UploadedDoc {
+struct UploadedDoc: Identifiable, Decodable {
+    let id: UUID
+    let folderId: String
     let name: String
+    let storagePath: String
+    let mimeType: String
+    let sizeBytes: Int64
     let date: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case folderId = "folder_id"
+        case name = "display_name"
+        case storagePath = "storage_path"
+        case mimeType = "mime_type"
+        case sizeBytes = "size_bytes"
+        case date = "document_date"
+    }
+}
+
+struct ProfileRecord: Decodable {
+    let firstName: String
+    let lastName: String
+    let birthDate: String
+    let height: String
+    let weight: String
+    let conditions: [String]
+    let screeningAnswers: [String: String]
+    let agreedPrivacy: Bool
+    let wearableChoice: String?
+
+    enum CodingKeys: String, CodingKey {
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case birthDate = "birth_date"
+        case height
+        case weight
+        case conditions
+        case screeningAnswers = "screening_answers"
+        case agreedPrivacy = "agreed_privacy"
+        case wearableChoice = "wearable_choice"
+    }
+}
+
+struct ProfileUpsert: Encodable {
+    let id: UUID
+    let firstName: String
+    let lastName: String
+    let birthDate: String
+    let height: String
+    let weight: String
+    let conditions: [String]
+    let screeningAnswers: [String: String]
+    let agreedPrivacy: Bool
+    let wearableChoice: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case birthDate = "birth_date"
+        case height
+        case weight
+        case conditions
+        case screeningAnswers = "screening_answers"
+        case agreedPrivacy = "agreed_privacy"
+        case wearableChoice = "wearable_choice"
+    }
+}
+
+struct MedicalDocumentInsert: Encodable {
+    let userId: UUID
+    let folderId: String
+    let displayName: String
+    let storagePath: String
+    let mimeType: String
+    let sizeBytes: Int
+    let documentDate: String
+
+    enum CodingKeys: String, CodingKey {
+        case userId = "user_id"
+        case folderId = "folder_id"
+        case displayName = "display_name"
+        case storagePath = "storage_path"
+        case mimeType = "mime_type"
+        case sizeBytes = "size_bytes"
+        case documentDate = "document_date"
+    }
 }
 
 enum AppData {

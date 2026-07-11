@@ -1,21 +1,21 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct UploadSheetView: View {
     @EnvironmentObject var state: AppState
 
     var body: some View {
         GeometryReader { proxy in
-            let topInset: CGFloat = state.uploadStep == .pick ? proxy.size.height * 0.38 : proxy.size.height * 0.24
-
             ZStack(alignment: .bottom) {
                 Color.black.opacity(0.4)
                     .ignoresSafeArea()
-                    .onTapGesture { state.closeUpload() }
+                    .onTapGesture { if !state.isUploading { state.closeUpload() } }
 
                 VStack(spacing: 0) {
                     HStack {
                         Spacer()
                         ZCloseButton { state.closeUpload() }
+                            .disabled(state.isUploading)
                     }
                     .padding(.horizontal, 20)
                     .padding(.top, 18)
@@ -28,12 +28,12 @@ struct UploadSheetView: View {
                             .padding(.bottom, 24)
                     }
                 }
-                .frame(height: proxy.size.height - topInset)
+                .frame(height: proxy.size.height * 0.64)
                 .background(ZColor.modalBg)
-                .clipShape(RoundedCorner(radius: 28, corners: [.topLeft, .topRight]))
+                .clipShape(RoundedCorner(radius: 12, corners: [.topLeft, .topRight]))
             }
         }
-        .animation(.easeInOut(duration: 0.2), value: state.uploadStep)
+        .animation(.easeInOut(duration: 0.15), value: state.uploadStep)
     }
 
     @ViewBuilder
@@ -50,28 +50,44 @@ struct UploadSheetView: View {
 
 private struct UploadPickStep: View {
     @EnvironmentObject var state: AppState
+    @State private var isImporterPresented = false
 
     var body: some View {
-        VStack(spacing: 14) {
-            Spacer()
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .fill(Color(hex: "#e3ddd1"))
-                .frame(width: 60, height: 60)
-                .overlay(Image(systemName: "folder").font(.system(size: 24)).foregroundStyle(Color(hex: "#3a3a3a")))
-
-            Text("Upload a result")
-                .font(.zSerif(24))
+        VStack(spacing: 16) {
+            Image(systemName: "doc.badge.plus")
+                .font(.system(size: 32))
                 .foregroundStyle(ZColor.ink)
 
-            Text("Add your document now. You can file it into a folder after.")
+            Text("Upload a medical document")
+                .font(.z(22, .bold))
+                .foregroundStyle(ZColor.ink)
+
+            Text("PDF, JPEG, or PNG · 10 MB maximum")
                 .font(.z(13.5))
                 .foregroundStyle(ZColor.textTertiary)
-                .multilineTextAlignment(.center)
-            Spacer()
 
-            PrimaryButton(title: "Upload files +") { state.simulateUpload() }
+            if let error = state.uploadError {
+                Text(error)
+                    .font(.z(13))
+                    .foregroundStyle(Color.red)
+            }
+
+            PrimaryButton(title: "Choose file") { isImporterPresented = true }
         }
         .frame(minHeight: 260)
+        .fileImporter(
+            isPresented: $isImporterPresented,
+            allowedContentTypes: [.pdf, .jpeg, .png],
+            allowsMultipleSelection: false
+        ) { result in
+            switch result {
+            case .success(let urls):
+                guard let url = urls.first else { return }
+                state.selectFile(url)
+            case .failure:
+                state.uploadError = "The file picker could not be opened."
+            }
+        }
     }
 }
 
@@ -79,36 +95,19 @@ private struct UploadUploadingStep: View {
     @EnvironmentObject var state: AppState
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text("FILES NAME")
-                .font(.z(11.5, .bold))
-                .tracking(0.6)
+        VStack(spacing: 16) {
+            ProgressView()
+                .tint(ZColor.ink)
+            Text("Uploading \(state.uploadFileName)")
+                .font(.z(14, .semibold))
+                .foregroundStyle(ZColor.ink)
+                .multilineTextAlignment(.center)
+            Text("Keep Zana open until the upload finishes.")
+                .font(.z(13))
                 .foregroundStyle(ZColor.textTertiary)
-
-            HStack(spacing: 12) {
-                IconTile(systemName: "doc.fill", background: ZColor.appBg, foreground: Color(hex: "#3a3a3a"), size: 36, iconSize: 15, corner: 8)
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("Bloodwork Panel Report")
-                        .font(.z(13.5, .semibold))
-                        .foregroundStyle(ZColor.ink)
-                    Text("\(state.uploadProgressLabel) · Uploading")
-                        .font(.z(11))
-                        .foregroundStyle(ZColor.textTertiary)
-                    GeometryReader { proxy in
-                        ZStack(alignment: .leading) {
-                            Capsule().fill(ZColor.trackFill)
-                            Capsule()
-                                .fill(ZColor.uploadProgressGradient)
-                                .frame(width: proxy.size.width * state.uploadProgress / 100)
-                        }
-                    }
-                    .frame(height: 4)
-                }
-            }
-            .padding(14)
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
+        .frame(minHeight: 240)
+        .frame(maxWidth: .infinity)
     }
 }
 
@@ -117,13 +116,16 @@ private struct UploadDetailsStep: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            ZLabeledField(label: "Files name", text: $state.uploadFileName)
+            Text("Document details")
+                .font(.z(22, .bold))
+                .foregroundStyle(ZColor.ink)
+
+            ZLabeledField(label: "File name", text: $state.uploadFileName)
             ZLabeledField(label: "Date", placeholder: "Jan 6, 2026", text: $state.uploadFileDate)
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("CATEGORY / FOLDER")
-                    .font(.z(11.5, .bold))
-                    .tracking(0.6)
+                Text("Folder")
+                    .font(.z(12, .semibold))
                     .foregroundStyle(ZColor.textTertiary)
 
                 Menu {
@@ -132,7 +134,7 @@ private struct UploadDetailsStep: View {
                     }
                 } label: {
                     HStack {
-                        Text(AppData.folderDefs.first { $0.id == state.uploadFolder }?.name ?? "")
+                        Text(AppData.folderDefs.first { $0.id == state.uploadFolder }?.name ?? "General")
                             .font(.z(14))
                             .foregroundStyle(ZColor.ink)
                         Spacer()
@@ -142,15 +144,25 @@ private struct UploadDetailsStep: View {
                     }
                     .padding(14)
                     .background(Color.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                     .overlay(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
                             .stroke(ZColor.inputBorder, lineWidth: 1)
                     )
                 }
             }
 
-            PrimaryButton(title: "Next →") { state.confirmUploadDetails() }
+            if let error = state.uploadError {
+                Text(error)
+                    .font(.z(13))
+                    .foregroundStyle(Color.red)
+            }
+
+            PrimaryButton(
+                title: "Upload document",
+                background: state.uploadFileName.trimmed.isEmpty ? ZColor.disabled : ZColor.ink,
+                isDisabled: state.uploadFileName.trimmed.isEmpty
+            ) { state.uploadDocument() }
         }
     }
 }
@@ -160,48 +172,28 @@ private struct UploadDoneStep: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                HStack(spacing: 8) {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundStyle(ZColor.successText)
-                    Text("Document Uploaded")
-                }
-                Spacer()
-                Image(systemName: "xmark")
-                    .font(.system(size: 11, weight: .semibold))
-            }
-            .font(.z(13, .semibold))
-            .foregroundStyle(ZColor.successText)
-            .padding(12)
-            .background(ZColor.successBg)
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            Image(systemName: "checkmark.circle")
+                .font(.system(size: 28))
+                .foregroundStyle(ZColor.successText)
 
-            Text("FILES NAME")
-                .font(.z(11.5, .bold))
-                .tracking(0.6)
-                .foregroundStyle(ZColor.textTertiary)
+            Text("Document uploaded")
+                .font(.z(22, .bold))
+                .foregroundStyle(ZColor.ink)
 
             HStack(spacing: 12) {
-                IconTile(systemName: "doc.fill", background: ZColor.appBg, foreground: Color(hex: "#3a3a3a"), size: 36, iconSize: 15, corner: 8)
+                IconTile(systemName: "doc.fill", background: ZColor.appBg, foreground: ZColor.ink, size: 36, iconSize: 15, corner: 8)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(state.uploadFileName)
                         .font(.z(13.5, .semibold))
                         .foregroundStyle(ZColor.ink)
-                    Text(AppData.folderDefs.first { $0.id == state.uploadFolder }?.name ?? "")
+                    Text(AppData.folderDefs.first { $0.id == state.uploadFolder }?.name ?? "General")
                         .font(.z(11))
                         .foregroundStyle(ZColor.textTertiary)
-                }
-                Spacer()
-                Button { state.openAiSummary() } label: {
-                    Circle()
-                        .fill(ZColor.aiGradient)
-                        .frame(width: 32, height: 32)
-                        .overlay(Image(systemName: "sparkles").font(.system(size: 13)).foregroundStyle(.white))
                 }
             }
             .padding(14)
             .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
 
             PrimaryButton(title: "Done") { state.finishUpload() }
         }

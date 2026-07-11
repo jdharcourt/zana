@@ -36,7 +36,18 @@ struct AccountTabView: View {
                     }
                 }
                 .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+
+                Button("Sign out") { state.signOut() }
+                    .font(.z(14, .semibold))
+                    .foregroundStyle(Color.red)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .stroke(ZColor.inputBorder, lineWidth: 1)
+                    )
+                    .padding(.top, 16)
             }
             .padding(.horizontal, 22)
             .padding(.top, 6)

@@ -1,7 +1,5 @@
 import SwiftUI
 
-/// The dark-scrim bottom sheet that hosts every onboarding step after the carousel:
-/// signup, verification, profile, privacy, conditions, screenings check, and wearable sync.
 struct OnboardingModalView: View {
     @EnvironmentObject var state: AppState
 
@@ -17,6 +15,20 @@ struct OnboardingModalView: View {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 0) {
                             stepContent
+
+                            if let error = state.authError {
+                                Text(error)
+                                    .font(.z(13))
+                                    .foregroundStyle(Color.red)
+                                    .padding(.top, 12)
+                            }
+
+                            if state.isAuthLoading {
+                                ProgressView()
+                                    .tint(ZColor.ink)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.top, 12)
+                            }
                         }
                         .padding(.horizontal, 24)
                         .padding(.top, 6)
@@ -24,7 +36,7 @@ struct OnboardingModalView: View {
                     }
                 }
                 .background(ZColor.modalBg)
-                .clipShape(RoundedCorner(radius: 28, corners: [.topLeft, .topRight]))
+                .clipShape(RoundedCorner(radius: 12, corners: [.topLeft, .topRight]))
             }
         }
         .transition(.opacity.combined(with: .move(edge: .bottom)))
@@ -50,7 +62,6 @@ struct OnboardingModalView: View {
     private var stepContent: some View {
         switch state.step {
         case .signupEmail: EmailStepView()
-        case .verifyCode: VerifyCodeStepView()
         case .profileName: ProfileNameStepView()
         case .profileDetails: ProfileDetailsStepView()
         case .privacy: PrivacyStepView()
